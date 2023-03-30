@@ -56,8 +56,8 @@ export default {
 <style>
 .image-grid {
   margin: 2vmin;
-  column-count: 4; /* Set the number of columns */
-  column-gap: 10px; /* Set the gap between columns */
+  column-count: 4; 
+  column-gap: 10px; 
 }
 
 .image-container {
@@ -65,7 +65,7 @@ export default {
   display: inline-block;
   width: 100%;
   height: auto;
-  margin-bottom: 10px; /* Set the gap between rows */
+  margin-bottom: 10px; 
 }
 
 .image-container img {
@@ -75,7 +75,7 @@ export default {
 
 @media screen and (min-width: 768px) {
   .image-grid {
-    column-width: calc(100% / 4); /* Set the width of each column */
+    column-width: calc(100% / 4); 
   }
 }
 </style>
