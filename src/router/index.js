@@ -1,14 +1,25 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import ImageDetails from "../views/ImageDetails.vue"
+import NotFound from '../components/NotFound'
 
 Vue.use(VueRouter);
 
 const routes = [
   {
+    path: '*',
+    component: NotFound,
+  },
+  {
     path: "/",
     name: "home",
     component: HomeView,
+  },
+  {
+    path: '/image/:id',
+    name: 'ImageDetails',
+    component: ImageDetails
   },
   {
     path: "/about",
