@@ -14,8 +14,16 @@ export default {
       page: 1,
       perPage: 20,
       photos: [],
-      isLoading: false
+      isLoading: false,
+      category : this.$route.params.name
     };
+  },
+  watch: {
+    '$route.params.name'(newCategoryName) {
+      this.category = newCategoryName;
+      this.photos = []
+      this.loadPhotos();
+    }
   },
   created() {
     this.loadPhotos();
@@ -27,14 +35,16 @@ export default {
   methods: {
     async loadPhotos() {
       try {
-        this.isLoading = true;
-        const response = await axios.get(`https://api.unsplash.com/photos?page=${this.page}&per_page=${this.perPage}&client_id=lebTpI4Osa9WxNrZiPtmv2bQaeFaV7r4fQgoCQ6e-88`);
-        this.photos = [...this.photos, ...response.data];
-        this.page++;
-      } catch (error) {
-        console.error(error);
-      } finally {
-        this.isLoading = false;
+          this.isLoading = true;
+          const { data } = await axios.get(`https://api.unsplash.com/search/photos?query=${this.category}&client_id=lebTpI4Osa9WxNrZiPtmv2bQaeFaV7r4fQgoCQ6e-88`);
+          if (data.results?.length !== 0) {
+            this.photos = [...this.photos, ...data.results];
+            this.page++;
+        }
+        } catch (error) {
+          console.error(error);
+        } finally {
+          this.isLoading = false;
       }
     },
     handleScroll() {
@@ -56,8 +66,8 @@ export default {
 <style>
 .image-grid {
   margin: 2vmin;
-  column-count: 4; /* Set the number of columns */
-  column-gap: 10px; /* Set the gap between columns */
+  column-count: 4;
+  column-gap: 10px; 
 }
 
 .image-container {
@@ -65,7 +75,7 @@ export default {
   display: inline-block;
   width: 100%;
   height: auto;
-  margin-bottom: 10px; /* Set the gap between rows */
+  margin-bottom: 10px;
 }
 
 .image-container img {
@@ -75,7 +85,7 @@ export default {
 
 @media screen and (min-width: 768px) {
   .image-grid {
-    column-width: calc(100% / 4); /* Set the width of each column */
+    column-width: calc(100% / 4); 
   }
 }
 </style>

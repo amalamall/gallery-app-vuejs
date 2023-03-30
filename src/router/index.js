@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import ImageDetails from "../views/ImageDetails.vue"
 import NotFound from '../components/NotFound'
+import ListImagesByCollection from '../views/ListImagesByCollection'
 
 Vue.use(VueRouter);
 
@@ -20,6 +21,11 @@ const routes = [
     path: '/image/:id',
     name: 'ImageDetails',
     component: ImageDetails
+  },
+  {
+    path: '/images/collection/:name',
+    name: 'ListImagesByCollection',
+    component: ListImagesByCollection
   },
   {
     path: "/about",

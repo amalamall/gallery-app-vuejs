@@ -1,12 +1,11 @@
 <template>
-  <div class="home">
+  <div>
     <SectionDisplay />
     <ListImages />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
 import SectionDisplay from "@/components/SectionDisplay.vue";
 import ListImages from "@/components/ListImages.vue"
 

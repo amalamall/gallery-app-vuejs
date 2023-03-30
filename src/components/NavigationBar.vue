@@ -9,28 +9,18 @@
         </div>
         <div class="nav-search-form">
           <form>
-            <input type="text" placeholder="Search free high-resolution photos">
+            <input type="text" name="search" v-model="search" placeholder="Search free high-resolution photos">
+            <button type="submit" @click.stop.prevent="submit()"></button>
           </form>
         </div>
       </div>
       <ul class="nav">
         <li><router-link :to="{ name: 'about' }"><a href="#">About</a></router-link>  </li>
-        <!-- <li><a href="#">Login</a></li>
-        <li><a href="#">Join For Free</a></li> -->
       </ul>
     </nav>
     <div class="category-nav">
-      <div class="category">
-        <router-link :to="{ name: 'home' }"><a >Nature</a></router-link>
-      </div>
-      <div class="category">
-        <router-link :to="{ name: 'home' }"><a >Love</a></router-link>
-      </div>
-      <div class="category">
-        <router-link :to="{ name: 'home' }"><a >Flowers</a></router-link>
-      </div>
-      <div class="category">
-        <router-link :to="{ name: 'home' }"><a >Women</a></router-link>
+      <div class="category" v-for="category in categories" :key="category">
+      <router-link :to="{ name: 'ListImagesByCollection', params: { name: category } }"><a>{{ category }}</a></router-link>
       </div>
     </div>
     <router-view></router-view> 
@@ -40,6 +30,17 @@
   <script>
   export default {
     name: "NavigationBar",
+    data() {
+      return {
+        search : null,
+        categories: ['Nature','Love','Flowers','Women']
+      };
+    },
+    methods :{
+    submit(){
+      this.$router.push("/images/collection/"+ this.search);
+    }
+  }
   }
   </script>
   
@@ -61,7 +62,7 @@
 }
 
 .logo h1 {
-    font-size:1.1rem;
+    font-size:1.3rem;
 }
 
 .logo p {
@@ -83,17 +84,18 @@
 
 .nav li:last-child a {
     display : block;
-    background: #3cb44e;
-    color : #fff;
+    background: #eee;
+    color : #000;
     padding: 0.5rem 0.6rem;
     border-radius: 5px;
+    transition: filter 0.5s ;
 }
 
 .nav li:last-child a {
     display : block;
-    background: #3cb44e;
-    color : #fff;
-    padding: 0.5rem 0.6rem;
+    background: #eee;
+    color : #000;
+    padding: 0.4rem 0.7rem;
     border-radius: 5px;
     transition: filter 0.5s ;
 }
@@ -111,7 +113,7 @@
     border-radius: 20px;
     border : none;
     background-color: #eee;
-    width: 600px;
+    width: 70vmin;
     font-size: 0.9rem;
     color:#333;
 }

@@ -38,11 +38,11 @@ a {
     display: none;
   }
 
-  .hero {
+  .bg {
     background-size: 200% 700px;
   }
 
-  .hero-container {
+  .bg-container {
     max-width: 90%;
   }
 

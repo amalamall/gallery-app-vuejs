@@ -1,83 +1,102 @@
 <template>
-    <section class="hero">
-    <div class="hero-container">
-      <div class="hero-content">
+    <section class="bg">
+    <div class="bg-container">
+      <div class="bg-content">
         <h1>Simple Gallery</h1>
         <p>
           The internet’s source of freely useable images.<br>
           Powered by creators everywhere.
         </p>
-        <div class="hero-search-form">
+        <div class="bg-search-form">
           <form>
-            <input type="text" placeholder="Search free high-resolution photos">
+            <input type="text" name="search" v-model="search" placeholder="Search free high-resolution photos">
+            <button type="submit" @click.stop.prevent="submit()"></button>
           </form>
         </div>
         <div class="trending-search-tags">
-          <p>Trending searches: <a href="#">flower</a>, <a href="#">wallpaper</a>, <a href="#">sad</a>, <a href="#">love</a></p>
+          <p>
+            Trending searches: 
+            <a v-for="category in categories" :key="category" href="#">
+              <router-link :to="{ name: 'ListImagesByCollection', params: { name: category } }">
+                {{ category }}
+              </router-link>
+            </a>
+              </p>
         </div>
       </div>
     </div>
-    <div class="hero-overlay"></div>
+    <div class="bg-overlay"></div>
   </section>
 </template>
 
 <script>
 export default {
   name: "SectionDisplay",
+  data() {
+      return {
+        search : null,
+        categories: ['flower','wallpaper','sad','love']
+      };
+    },
+  methods :{
+    submit(){
+      this.$router.push("/images/collection/"+ this.search);
+    }
+  }
 }
 </script>
 
 
 <style>
-    /* Hero */
-.hero {
+    /* bg */
+.bg {
   height: 600px;
-  background: url('../assets/hero.jpg') no-repeat right top;
+  background: url('../assets/bg-gallery.jpg') no-repeat right top;
   background-size: 100% 770px;
   width: 100%;
   position: relative;
 }
 
-.hero-overlay {
+.bg-overlay {
   position: absolute;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.5);
   top: 0;
   left: 0;
   height: 100%;
   width: 100%;
 }
 
-.hero-container {
+.bg-container {
   max-width: 60%;
   margin: auto;
 }
 
-.hero-content {
+.bg-content {
   height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.hero-content h1 {
+.bg-content h1 {
   font-size: 3rem;
   color: #fff;
   z-index: 2;
 }
 
-.hero-content p {
+.bg-content p {
   color: #fff;
   z-index: 2;
   margin: 1rem 0;
   line-height: 1.5;
 }
 
-.hero-search-form {
+.bg-search-form {
   z-index: 2;
   margin: 1rem 0.6rem 0 0;
 }
 
-.hero-search-form input {
+.bg-search-form input {
   width: 100%;
   padding: 1.2rem;
   border-radius: 5px;
